@@ -277,6 +277,7 @@ class FtraceLog{
             this->rows = rows;
         }
         FtraceLog(ifstream&fin){
+            cout<<"Reading file..."<<endl;
             this->rows = parse_log(fin);
         }
         FtraceLog(string filename){
@@ -392,17 +393,26 @@ FtraceLogRow parse_row(string line){
     ss >> tmp;
     row.set_timestamp(tmp.substr(0, tmp.size()-1));
     row.set_duration("");
-    ss >> tmp;
+    string tmp2;
+    tmp="";
+    while(ss >> tmp2){
+        tmp+=tmp2+" ";
+    }
     auto first_arg = tmp.find_first_not_of(POSSIBLE_FUNCTIONS_CHARACTERS);
-    row.set_func(tmp.substr(first_arg-1));
-    row.set_args(tmp.substr(first_arg));
+    if(first_arg == string::npos){
+        row.set_func(tmp);
+    }
+    else{
+        row.set_func(tmp.substr(0,first_arg));
+        row.set_args(tmp.substr(first_arg));
+    }
     return row;
 }
 vector<FtraceLogRow> parse_log(ifstream& fin){
     vector<FtraceLogRow> rows;
     string str;
     while(getline(fin,str)){
-        if(str[0] == '#'){
+        if(str.size()>0 && str[0] == '#'){
             continue;
         }
         else{
@@ -425,6 +435,9 @@ int main(int argc, char *argv[]) {
     auto grouped = log.group_by_func();
     for(auto it : grouped){
         fout << it.first << " " << it.second.size() << endl;
+        for(auto row : it.second){
+            row.print_row(fout);
+        }
     }
 
 
