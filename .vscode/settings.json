@@ -1,17 +1,21 @@
 {
-  "files.associations": {
-    "tuple": "cpp",
-    "*.tcc": "cpp",
-    "numeric": "cpp",
-    "fstream": "cpp",
-    "iostream": "cpp",
-    "istream": "cpp",
-    "ostream": "cpp",
-    "shared_mutex": "cpp",
-    "system_error": "cpp",
-    "regex": "cpp",
-    "typeindex": "cpp",
-    "typeinfo": "cpp",
-    "iosfwd": "cpp"
-  }
+	"files.associations": {
+		"tuple": "cpp",
+		"*.tcc": "cpp",
+		"numeric": "cpp",
+		"fstream": "cpp",
+		"iostream": "cpp",
+		"istream": "cpp",
+		"ostream": "cpp",
+		"shared_mutex": "cpp",
+		"system_error": "cpp",
+		"regex": "cpp",
+		"typeindex": "cpp",
+		"typeinfo": "cpp",
+		"iosfwd": "cpp"
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[cpp]": {
+		"editor.defaultFormatter": "ms-vscode.cpptools"
+	}
 }
