@@ -425,7 +425,7 @@ vector<FtraceLogRow> parse_log(ifstream& fin){
 int main(int argc, char *argv[]) {
     if(argc < 2){
         cout << "Usage: sudo ./ftrace_extract <ftrace_file>" << endl;
-        return 0;
+        return -1;
     }
     ifstream fin(argv[1]);
     ofstream fout("ftrace_extract.txt");
