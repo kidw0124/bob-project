@@ -1,19 +1,20 @@
 #include <bits/stdc++.h>
+#include <dlfcn.h>
+#include <fcntl.h>  // for open
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
 using namespace std;
 
 #define BUFFER_SIZE 1024
 
-int main() {
-  char buf[BUFFER_SIZE];
-  int length;
-
-  // 0번 파일(표준 입력) 에서 입력을 받아옴
-  length = read(0, buf, BUFFER_SIZE);
-
-  // 1번 파일(표준 출력)으로 출력함
-  if (write(1, buf, length) != length) {
-    fprintf(stderr, "write error\n");
-    exit(1);
+int main(int argc, char *argv[]) {
+  char filename[256];
+  if (argc > 1) {
+    strcpy(filename, argv[1]);
+  } else {
+    strcpy(filename, "test.txt");
   }
-  exit(0);
+  int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+  write(fd, "HI", 3);
 }
