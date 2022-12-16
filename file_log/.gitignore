@@ -24,3 +24,5 @@
 *.obj
 *.dSYM
 *.dSYM/*
+
+test*.txt
