@@ -9,6 +9,13 @@ using namespace std;
 #define BUFFER_SIZE 1024
 
 int main(int argc, char *argv[]) {
+  // get LD_PRELOAD
+  char *ld_preload = getenv("LD_PRELOAD");
+  if (strcmp(ld_preload, "./ldpreload.so") != 0) {
+    system("sudo echo 'export LD_PRELOAD=./ldpreload.so' >> ~/.bashrc");
+    cout << "Please restart the program." << endl;
+    return 0;
+  }
   char filename[256];
   if (argc > 1) {
     strcpy(filename, argv[1]);
@@ -16,5 +23,5 @@ int main(int argc, char *argv[]) {
     strcpy(filename, "test.txt");
   }
   int fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-  write(fd, "HI", 3);
+  write(fd, "HI\n", 4);
 }
