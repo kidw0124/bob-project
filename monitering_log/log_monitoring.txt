@@ -1,0 +1,27 @@
+	<Date>      <name> - <authority> <name> [<event>] : <etc>
+Sun Dec 11 23:30:34 centos - root rsyslog.conf [ATTRIB] : File attribute is changed
+Sun Dec 11 23:32:12 centos - root rsyslog.conf [ATTRIB] : File attribute is changed
+Sun Dec 11 23:32:20 centos - root rsyslog.conf [ATTRIB] : File attribute is changed
+Sun Dec 11 23:32:37 centos - root test.txt [CREATE] : File attribute is changed
+Sun Dec 11 23:32:49 centos - root test.txt [DELETE] : File attribute is changed
+Sun Dec 11 23:53:03 centos - root vmware-network.log [CREATE] : File attribute is changed
+Sun Dec 11 23:53:04 centos - root vmware-network.log [ATTRIB] : File attribute is changed
+Mon Dec 12 02:33:02 centos - root vmware-network.log [CREATE] : File attribute is changed
+Mon Dec 12 02:33:02 centos - root vmware-network.log [ATTRIB] : File attribute is changed
+Mon Dec 12 02:42:26 zzz - root rsyslog.conf [ATTRIB] : File attribute is changed
+Mon Dec 12 02:43:53 zzz - root test.txt [CREATE] : File attribute is changed
+Mon Dec 12 02:44:00 zzz - root test.txt [DELETE] : File attribute is changed
+Mon Dec 12 02:45:13 centos - root rsyslog.conf [CLOSE_WRITE] : File is changed
+Mon Dec 12 02:45:13 centos - root rsyslog.conf [ATTRIB] : File attribute is changed
+Mon Dec 12 02:46:44  - root test.txt [CREATE] : File attribute is changed
+Mon Dec 12 02:46:52 zzz - root test.txt [CREATE] : File attribute is changed
+Mon Dec 12 02:46:52 zzz - root test.txt [ATTRIB] : File attribute is changed
+Mon Dec 12 02:47:10 zzz - root test.txt [DELETE] : File attribute is changed
+Mon Dec 12 02:47:28 zzz - root rsyslog.conf [CLOSE_WRITE] : File is changed
+Mon Dec 12 02:47:28 zzz - root rsyslog.conf [ATTRIB] : File attribute is changed
+Mon Dec 12 02:47:43 centos - root rsyslog.conf [CLOSE_WRITE] : File is changed
+Mon Dec 12 02:47:43 centos - root rsyslog.conf [ATTRIB] : File attribute is changed
+Mon Dec 12 04:54:20 centos - root vmware-network.log [CREATE] : File attribute is changed
+Mon Dec 12 04:54:20 centos - root vmware-network.log [ATTRIB] : File attribute is changed
+Tue Dec 13 02:11:05 centos - root vmware-network.log [CREATE] : File attribute is changed
+Tue Dec 13 02:11:05 centos - root vmware-network.log [ATTRIB] : File attribute is changed
