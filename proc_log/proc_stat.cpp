@@ -67,6 +67,7 @@ int main(void)
         char p_id[256];
         char p_pid[256];
         char named[256];
+        char name[256];
         struct stat lstat;
         char buffer[256];
         char tic[256];
@@ -78,9 +79,10 @@ int main(void)
         char w[20];
         char strc[256];
         char strtext[256];
+        FILE *pp, *pn;
         char buffe[2048576];
         int statuss;
-        FILE *pp, *pn;
+        
 
         system("echo 0 > /sys/kernel/debug/tracing/tracing_on");
         system("echo 0 > /sys/kernel/debug/tracing/events/enable");
@@ -212,7 +214,7 @@ int main(void)
                             char c_pd[50];
                             char *c1 = fgets(buffer5, 1048567, pp);
                             if( c1 == NULL ) break;
-                            sscanf(buffer1, "%s %*s %*s %s", c_pd, c_name);
+                            sscanf(buffer5, "%s %*s %*s %s", c_pd, c_name);
                             if(strcmp(c_pd, p_id)==0)
                             {
                                 if(strcmp(c_name, named)==0)
@@ -228,7 +230,7 @@ int main(void)
 
                                         if(strncmp(i, dir_entry->d_name, sizeof(i))==0)
                                         {
-                                            fprintf(pn,"%s %s %s %s %s\n", j, k, p, q, w);
+                                            fprintf(pn ,"%s %s %s %s %s\n", j, k, p, q, w);
                                         }
                                     }
                                     fclose(fp3);
@@ -262,15 +264,16 @@ int main(void)
                 closedir(dir_info);
             }
         }
-        
+    sleep(300);
     system("echo 0 > /sys/kernel/debug/tracing/tracing_on");
     system("cp /sys/kernel/debug/tracing/trace .");
     system("mv trace ftrace_log.c");
     system("cat ftrace_log.c | grep -e do_exit | sed -e 's/-/ /g' -e 's/+/ /g' -e 's/://g' | awk '{print $1,$2,$5,$6}' >>  ftrace01.txt");
-
+    sleep(300);
     FILE *fp_1, *fp_2, *fp_3;
-    char buffer3[1000];
-    char buffer4[1000];
+    
+    char buffer1[1000];
+    char buffer2[1000];
     char third[100];
     char fine[100];
     char fifth[100];
@@ -292,7 +295,7 @@ int main(void)
         {
             char buffer2[1000];
             char *p2 = fgets(buffer2, 1000, fp_2);
-            sscanf(buffer2, "%s %s %s", fifith, fine, e_ti);
+            sscanf(buffer2, "%s %s %s", fifth, fine, e_ti);
             if( p2 == NULL )
             {
                 fseek(fp_2, 0, SEEK_SET);
@@ -300,7 +303,7 @@ int main(void)
             }
             if( strcmp(third, fine)==0 )
             {
-                if(strcmp(six, fifith)==0)
+                if(strcmp(six, fifth)==0)
                 {
                     fprintf(fp_3, "%s", p1);
                     fprintf(fp_3, "%s\n", e_ti);
