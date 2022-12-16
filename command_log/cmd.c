@@ -7,15 +7,15 @@ int main() {
     
     FILE* bash;
     bash = fopen("/etc/rsyslog.d/bash.conf", "a");
-    fprintf(bash, "local6.*	/var/log/command_1.log");
+    fprintf(bash, "local6.*	/var/log/commands.log");
 
     system("service rsyslog restart");
 
     FILE* logrotate;
     logrotate = fopen("/etc/logrotate.d/syslog", "a");
-    fprintf(logrotate, "/var/log/command_1.log");
+    fprintf(logrotate, "/var/log/commands.log");
 
-    system("cat /dev/null > /var/log/command_1.log");
+    system("cat /dev/null > /var/log/commands.log");
 
     return 0;
 }
