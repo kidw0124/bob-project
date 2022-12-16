@@ -8,8 +8,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "remove.h"
-
 using namespace std;
 
 string fd2path(int fd) {
@@ -27,7 +25,7 @@ string fd2path(int fd) {
       child = fts_children(file_system, 0);
       while (child && child->fts_link) {
         child = child->fts_link;
-        struct stat info = {0};
+        struct stat info;
         if (!S_ISSOCK(child->fts_statp->st_mode)) {
           if (!fstat(fd, &info) && !S_ISSOCK(info.st_mode)) {
             if (child->fts_statp->st_dev == info.st_dev) {
@@ -63,15 +61,15 @@ void __attribute__((constructor)) init_hooking() {
 }
 
 ssize_t write(int fd, const void *buf, size_t count) {
-  printf_real("PID is %d PPID is %d This is HOOKED write!\n", getpid(),
-              getppid());
-  printf_real("fd is %d buf is %s count is %d \n", fd, (char *)buf, count);
+  // printf_real("PID is %d PPID is %d This is HOOKED write!\n", getpid(),
+  //             getppid());
+  // printf_real("fd is %d buf is %s count is %d \n", fd, (char *)buf, count);
   int nfd;
   if ((nfd = open_real("./filelog.txt", O_WRONLY | O_APPEND)) < 0) {
     fprintf(stderr, "%s open error\n", "./filelog.txt");
     exit(1);
   } else {
-    printf_real("nfd is %d \n", nfd);
+    // printf_real("nfd is %d \n", nfd);
   }
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
@@ -81,7 +79,7 @@ ssize_t write(int fd, const void *buf, size_t count) {
       ":" + std::to_string(tm.tm_min) + ":" + std::to_string(tm.tm_sec) + " ";
 
   string filePath = fd2path(fd) + ' ';
-  struct stat info = {0};
+  struct stat info;
   fstat(fd, &info);
   string fileStatusFlag = std::to_string(info.st_mode) + ' ';
   string fileOwner = string(getpwuid(info.st_uid)->pw_name) +
@@ -108,7 +106,7 @@ ssize_t write(int fd, const void *buf, size_t count) {
   string logstring = log.str();
 
   int w = write_real(nfd, logstring.c_str(), logstring.length());
-  printf_real("w is %d \n", w);
+  // printf_real("w is %d \n", w);
   if (w < 0) {
     fprintf(stderr, "%s write error\n", "./filelog.txt");
     exit(1);
@@ -118,15 +116,15 @@ ssize_t write(int fd, const void *buf, size_t count) {
 }
 
 FILE *fopen(const char *path, const char *mode) {
-  printf_real("PID is %d PPID is %d This is HOOKED fopen!\n", getpid(),
-              getppid());
-  printf_real("path is %s mode is %s \n", path, mode);
+  // printf_real("PID is %d PPID is %d This is HOOKED fopen!\n", getpid(),
+  //             getppid());
+  // printf_real("path is %s mode is %s \n", path, mode);
   int nfd;
   if ((nfd = open_real("./filelog.txt", O_WRONLY | O_APPEND)) < 0) {
     fprintf(stderr, "%s open error\n", "./filelog.txt");
     exit(1);
   } else {
-    printf_real("nfd is %d \n", nfd);
+    // printf_real("nfd is %d \n", nfd);
   }
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
@@ -136,7 +134,7 @@ FILE *fopen(const char *path, const char *mode) {
       ":" + std::to_string(tm.tm_min) + ":" + std::to_string(tm.tm_sec) + " ";
 
   string filePath = path + ' ';
-  struct stat info = {0};
+  struct stat info;
   stat(path, &info);
   string fileStatusFlag = std::to_string(info.st_mode) + ' ';
   string fileOwner = string(getpwuid(info.st_uid)->pw_name) +
@@ -163,7 +161,7 @@ FILE *fopen(const char *path, const char *mode) {
   string logstring = log.str();
 
   int w = write_real(nfd, logstring.c_str(), logstring.length());
-  printf_real("w is %d \n", w);
+  // printf_real("w is %d \n", w);
   if (w < 0) {
     fprintf(stderr, "%s write error\n", "./filelog.txt");
     exit(1);
@@ -172,16 +170,16 @@ FILE *fopen(const char *path, const char *mode) {
 }
 
 int open(const char *pathname, int flags, mode_t mode = 0) {
-  printf_real("PID is %d PPID is %d This is HOOKED open!\n", getpid(),
-              getppid());
-  printf_real("pathname is %s flags is %d mode is %d \n", pathname, flags,
-              mode);
+  // printf_real("PID is %d PPID is %d This is HOOKED open!\n", getpid(),
+  //             getppid());
+  // printf_real("pathname is %s flags is %d mode is %d \n", pathname, flags,
+  // mode);
   int nfd;
   if ((nfd = open_real("./filelog.txt", O_WRONLY | O_APPEND)) < 0) {
     fprintf(stderr, "%s open error\n", "./filelog.txt");
     exit(1);
   } else {
-    printf_real("nfd is %d \n", nfd);
+    // printf_real("nfd is %d \n", nfd);
   }
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
@@ -191,7 +189,7 @@ int open(const char *pathname, int flags, mode_t mode = 0) {
       ":" + std::to_string(tm.tm_min) + ":" + std::to_string(tm.tm_sec) + " ";
 
   string filePath = pathname + ' ';
-  struct stat info = {0};
+  struct stat info;
   stat(pathname, &info);
   string fileStatusFlag = std::to_string(info.st_mode) + ' ';
   string fileOwner = string(getpwuid(info.st_uid)->pw_name) +
@@ -218,7 +216,7 @@ int open(const char *pathname, int flags, mode_t mode = 0) {
   string logstring = log.str();
 
   int w = write_real(nfd, logstring.c_str(), logstring.length());
-  printf_real("w is %d \n", w);
+  // printf_real("w is %d \n", w);
   if (w < 0) {
     fprintf(stderr, "%s write error\n", "./filelog.txt");
     exit(1);
