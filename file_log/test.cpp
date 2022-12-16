@@ -11,8 +11,12 @@ using namespace std;
 int main(int argc, char *argv[]) {
   // get LD_PRELOAD
   char *ld_preload = getenv("LD_PRELOAD");
-  if (strcmp(ld_preload, "./ldpreload.so") != 0) {
-    system("sudo echo 'export LD_PRELOAD=./ldpreload.so' >> ~/.bashrc");
+  if (strcmp(ld_preload,
+             "/home/dwoo/Desktop/bob-project/file_log/ldpreload.so") != 0) {
+    system(
+        "sudo echo 'export "
+        "LD_PRELOAD=/home/dwoo/Desktop/bob-project/file_log/ldpreload.so' >> "
+        "/etc/bash.bashrc");
     cout << "Please restart the program." << endl;
     return 0;
   }
