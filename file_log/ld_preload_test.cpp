@@ -8,8 +8,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "remove.h"
-
 using namespace std;
 
 string fd2path(int fd) {
