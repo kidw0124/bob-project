@@ -1,0 +1,26 @@
+
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+!Makefile
+!*/Makefile
+
+# execution files
+*.elf
+*.gdb
+*.o
+*.out
+*.exe
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.lib
+*.exp
+*.pdb
+*.obj
+*.dSYM
+*.dSYM/*

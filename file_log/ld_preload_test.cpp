@@ -65,8 +65,10 @@ ssize_t write(int fd, const void *buf, size_t count) {
   //             getppid());
   // printf_real("fd is %d buf is %s count is %d \n", fd, (char *)buf, count);
   int nfd;
-  if ((nfd = open_real("./filelog.txt", O_WRONLY | O_APPEND)) < 0) {
-    fprintf(stderr, "%s open error\n", "./filelog.txt");
+  if ((nfd = open_real("/home/dwoo/Desktop/bob-project/file_log/filelog.txt",
+                       O_WRONLY | O_APPEND)) < 0) {
+    fprintf(stderr, "%s open error\n",
+            "/home/dwoo/Desktop/bob-project/file_log/filelog.txt");
     exit(1);
   } else {
     // printf_real("nfd is %d \n", nfd);
@@ -108,7 +110,8 @@ ssize_t write(int fd, const void *buf, size_t count) {
   int w = write_real(nfd, logstring.c_str(), logstring.length());
   // printf_real("w is %d \n", w);
   if (w < 0) {
-    fprintf(stderr, "%s write error\n", "./filelog.txt");
+    fprintf(stderr, "%s write error\n",
+            "/home/dwoo/Desktop/bob-project/file_log/filelog.txt");
     exit(1);
   }
 
@@ -120,8 +123,10 @@ FILE *fopen(const char *path, const char *mode) {
   //             getppid());
   // printf_real("path is %s mode is %s \n", path, mode);
   int nfd;
-  if ((nfd = open_real("./filelog.txt", O_WRONLY | O_APPEND)) < 0) {
-    fprintf(stderr, "%s open error\n", "./filelog.txt");
+  if ((nfd = open_real("/home/dwoo/Desktop/bob-project/file_log/filelog.txt",
+                       O_WRONLY | O_APPEND)) < 0) {
+    fprintf(stderr, "%s open error\n",
+            "/home/dwoo/Desktop/bob-project/file_log/filelog.txt");
     exit(1);
   } else {
     // printf_real("nfd is %d \n", nfd);
@@ -163,7 +168,8 @@ FILE *fopen(const char *path, const char *mode) {
   int w = write_real(nfd, logstring.c_str(), logstring.length());
   // printf_real("w is %d \n", w);
   if (w < 0) {
-    fprintf(stderr, "%s write error\n", "./filelog.txt");
+    fprintf(stderr, "%s write error\n",
+            "/home/dwoo/Desktop/bob-project/file_log/filelog.txt");
     exit(1);
   }
   return fopen_real(path, mode);
@@ -175,8 +181,10 @@ int open(const char *pathname, int flags, mode_t mode = 0) {
   // printf_real("pathname is %s flags is %d mode is %d \n", pathname, flags,
   // mode);
   int nfd;
-  if ((nfd = open_real("./filelog.txt", O_WRONLY | O_APPEND)) < 0) {
-    fprintf(stderr, "%s open error\n", "./filelog.txt");
+  if ((nfd = open_real("/home/dwoo/Desktop/bob-project/file_log/filelog.txt",
+                       O_WRONLY | O_APPEND)) < 0) {
+    fprintf(stderr, "%s open error\n",
+            "/home/dwoo/Desktop/bob-project/file_log/filelog.txt");
     exit(1);
   } else {
     // printf_real("nfd is %d \n", nfd);
@@ -218,7 +226,8 @@ int open(const char *pathname, int flags, mode_t mode = 0) {
   int w = write_real(nfd, logstring.c_str(), logstring.length());
   // printf_real("w is %d \n", w);
   if (w < 0) {
-    fprintf(stderr, "%s write error\n", "./filelog.txt");
+    fprintf(stderr, "%s write error\n",
+            "/home/dwoo/Desktop/bob-project/file_log/filelog.txt");
     exit(1);
   }
   return open_real(pathname, flags, mode);
