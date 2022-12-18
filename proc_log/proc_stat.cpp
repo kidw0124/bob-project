@@ -103,9 +103,9 @@ int main(void)
 
         if (dir_info != NULL)
         {
-            if((pp = fopen("/tmp/content.txt", "r")) == NULL)
+            if((pp = fopen("/tmp/content01.txt", "r")) == NULL)
             {
-                pn = fopen("/tmp/content.txt", "w");
+                pn = fopen("/tmp/content01.txt", "w");
                 
                 while(dir_entry = readdir(dir_info))
                 {
@@ -134,6 +134,7 @@ int main(void)
 
                                     if(strncmp(i, dir_entry->d_name, sizeof(i))==0)
                                     {
+                                        fprintf(pn,"------------------------------\n");
                                         fprintf(pn,"%s %s %s %s %s \n", j, k, p, q, w);
                                     }
                                 }
@@ -174,9 +175,9 @@ int main(void)
                 closedir(dir_info);
                 fclose(pn);
             }
-            else if((pp = fopen("/tmp/content.txt", "r")) == NULL)
+            else if((pp = fopen("/tmp/content01.txt", "r")) != NULL)
             {
-                pn = fopen("/tmp/content.txt", "a");
+                pn = fopen("/tmp/content01.txt", "a");
                 
                 while(dir_entry = readdir(dir_info))
                 {
@@ -186,7 +187,7 @@ int main(void)
                         sprintf(proc_file, "/proc/%s/stat", dir_entry->d_name);
                         sprintf(proccm_file, "/proc/%s/cmdline", dir_entry->d_name);
 
-                        system("ps -eo pid,lstart | sed 1d > /tmp/tart_time.txt");
+                        system("ps -eo pid,lstart | sed 1d > /tmp/start_time.txt");
                         getcmdlined(proccm_file, cmdlined);
                         struct passwd *upasswd;
                         stat(proc_file,&lstat);
@@ -230,6 +231,7 @@ int main(void)
 
                                         if(strncmp(i, dir_entry->d_name, sizeof(i))==0)
                                         {
+                                            fprintf(pn,"------------------------------\n");
                                             fprintf(pn ,"%s %s %s %s %s\n", j, k, p, q, w);
                                         }
                                     }
@@ -264,12 +266,12 @@ int main(void)
                 closedir(dir_info);
             }
         }
-    sleep(300);
+    sleep(30);
     system("echo 0 > /sys/kernel/debug/tracing/tracing_on");
     system("cp /sys/kernel/debug/tracing/trace .");
     system("mv trace ftrace_log.c");
-    system("cat ftrace_log.c | grep -e do_exit | sed -e 's/-/ /g' -e 's/+/ /g' -e 's/://g' | awk '{print $1,$2,$5,$6}' >>  ftrace01.txt");
-    sleep(300);
+    system("cat ftrace_log.c | grep -e do_exit | sed -e 's/-/ /g' -e 's/+/ /g' -e 's/://g' | awk '{print $1,$2,$5,$6}' >>  /tmp/ftrace01.txt");
+    sleep(30);
     FILE *fp_1, *fp_2, *fp_3;
     
     char buffer1[1000];
@@ -310,8 +312,9 @@ int main(void)
                     d++;
                 }
             }
+            if(d == 0) fprintf(fp_3, "%s", p1);
         }
-        if(d == 0) fprintf(fp_3, "%s", p1);
+
     }
 
     fclose(fp_1);
